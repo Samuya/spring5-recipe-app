@@ -43,5 +43,6 @@ public class Category {
 		this.recipes = recipes;
 	}
 	
+	public Category(){};
 	
 }
