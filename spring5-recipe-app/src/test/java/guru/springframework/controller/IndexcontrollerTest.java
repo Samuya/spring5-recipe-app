@@ -25,6 +25,7 @@ import org.springframework.ui.Model;
 import guru.springframework.domain.Recipe;
 import guru.springframework.service.RecipeService;
 
+
 public class IndexcontrollerTest {
 	
 	@Mock
