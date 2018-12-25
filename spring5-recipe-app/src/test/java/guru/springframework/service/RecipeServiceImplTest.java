@@ -1,11 +1,15 @@
 package guru.springframework.service;
 
+import static org.hamcrest.CoreMatchers.any;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.junit.Before;
@@ -28,6 +32,22 @@ public class RecipeServiceImplTest {
 		recipeService = new RecipeServiceImpl(recipeRepo);
 	}
 
+	@Test
+	public void getRecipeByTest() throws Exception{
+		Recipe recipe = new Recipe();
+		recipe.setId(1L);
+		Optional<Recipe> recipeOptional = Optional.of(recipe);
+		
+		when(recipeRepo.findById(1l)).thenReturn(recipeOptional);
+		Recipe recipeReturned = recipeService.findById(1l);
+		
+		assertNotNull("NULL RECIPE RETURNED",recipeReturned);
+		verify(recipeRepo,times(1)).findById(1L);
+		verify(recipeRepo,never()).findAll();
+		
+		
+	}
+	
 	@Test
 	public void testGetRecipes() {
 		Recipe recipe = new Recipe();
